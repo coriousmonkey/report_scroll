@@ -4,7 +4,6 @@
 	<meta charset="utf-8">
 	<link rel="shortcut icon" type="image/ico" href="">
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
-
 	<title>FixedColumns example - Multiple fixed columns</title>
 	<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
 	<link rel="stylesheet" type="text/css" href="css/dataTables.fixedColumns.css">
@@ -17,6 +16,23 @@
     .sembunyi {
         display:none;
     }
+    input { 
+    font-family: Arial, Helvetica, sans-serif;
+    background: rgba(255, 255, 255, 0.44); 
+    color: #333; 
+    border: 2px solid #A4A4A4; 
+    padding: 4px 8px 4px 4px !important;
+    line-height: 1; 
+    width: 275px; 
+    height:25px; 
+  } 
+ input:hover { 
+    border: 2px solid #457B87; 
+  } 
+ input:focus { 
+    border: 2px solid #457B87; 
+    outline: none; 
+    background: rgb(255, 255, 255); } 
 
 	</style>
 	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
@@ -29,6 +45,7 @@
 	<script type="text/javascript" language="javascript" class="init">
 
 $(document).ready(function() {
+    otentifikasi();
     jqUpdateSize();    
     /*$('#loaddata').click(function(){
        loaddata(getUrlParameter('tahun'),getUrlParameter('divisi')); 
@@ -99,7 +116,7 @@ function update(){
 		paging:         false
 	} );
 	new $.fn.dataTable.FixedColumns( table, {
-		leftColumns: 3
+		leftColumns: 2
 	});
 }
 
@@ -124,9 +141,9 @@ function loaddata(tahun,divisi){
             timeout: 25000,
             success: function (data) {
                         $.mobile.loading( "hide" );
-                        $( "table#example tbody" ).html( data );
+                        $( "table#example" ).html( data );
                         var tbl = jQuery('table');
-                        jQuery.moveColumn(tbl, 14,2);
+                        jQuery.moveColumn(tbl, 13,1);
                         add();
                         update();
                 },
@@ -144,6 +161,31 @@ jQuery.moveColumn = function (table, from, to) {
     rows.each(function() {
         cols = jQuery(this).children('th, td');
         cols.eq(from).detach().insertBefore(cols.eq(to));
+    });
+}
+
+function otentifikasi(){   
+    $.ajax({
+        type: "POST",
+        url: hostnya+"login.php",
+        crossDomain: true,
+        data: '',
+        timeout: 25000,
+        success: function (data) {
+            
+            var masuk=data.split("-");
+            var user=$.session.get('user');
+            var pass=$.session.get('pass');
+            
+            if ((user==masuk[0])&&(pass==masuk[1])){
+            }else{
+                window.location.replace('index.html');
+            }
+        },
+        error: function (err) {
+            alert("Connection lost");
+            window.location.replace('index.html');
+        }
     });
 }
 
@@ -165,23 +207,7 @@ jQuery.moveColumn = function (table, from, to) {
          <div class="container">  
     		<section>
     			<table id="example" >
-                    <thead>
-                        <th>No</th>
-                          <th>divisi</th>
-                          <th style='text-align:center'>Jan</th>
-                          <th style='text-align:center'>Feb</th>
-                          <th style='text-align:center'>Mar</th>
-                          <th style='text-align:center'>Apr</th>
-                          <th style='text-align:center'>Mei</th>
-                          <th style='text-align:center'>Jun</th>
-                          <th style='text-align:center'>Jul</th>
-                          <th style='text-align:center'>Ags</th>
-                          <th style='text-align:center'>Sep</th>
-                          <th style='text-align:center'>Okt</th>
-                          <th style='text-align:center'>Nop</th>
-                          <th style='text-align:center'>Des</th>
-                          <th style='text-align:center'>Total</th>
-                    </thead>
+                    
                     <tbody></tbody>
     			</table>	
     		</section>
