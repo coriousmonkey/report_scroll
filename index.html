@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.squareui.css" />
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile-1.4.0.min.js"></script>
+  <script src="plugin/jquery.session.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script src="js/host.js"></script>
+
+<script>
+$(document).ready(function(){
+//alert(hostnya);
+
+document.addEventListener("backbutton", function(e){
+        var r = confirm("Do you want to close ?");
+        if (r == true) {
+            navigator.app.exitApp();
+        } else {
+            
+        }       
+    }, false);
+
+$("#nama").enterKey(function () {
+    $("#pass").focus();
+});
+
+$("#pass").enterKey(function () {
+    loaddata();
+});
+
+
+});
+
+$.fn.enterKey = function (fnc) {
+    return this.each(function () {
+        $(this).keypress(function (ev) {
+            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+            if (keycode == '13') {
+                fnc.call(this, ev);
+            }
+        })
+    })
+}
+
+function loaddata(){
+    $.mobile.loading( 'show', {
+    	text: 'loading',
+    	textVisible: true,
+    	theme: 'a',
+    	html: ""
+    });
+    
+    $.ajax({
+        type: "POST",
+        url: hostnya+"login.php",
+        crossDomain: true,
+        data: '',
+        timeout: 25000,
+        success: function (data) {
+            
+            var masuk=data.split("-");
+            var user=$("#nama").val();
+            var pass=$("#pass").val();
+            
+            if ((user==masuk[0])&&(pass==masuk[1])){
+                $.session.set('user', user);
+                $.session.set('pass', pass);
+                //redirect-----VVVVVVVVVVVVVVVVVVVVV
+                window.location.replace('menu.html');
+            }else{
+                $("#pass").val("");
+                $('#eror').popup('open', {
+                    transition: 'pop'
+                });
+            }
+            
+            $.mobile.loading( "hide" );
+        },
+        error: function (err) {
+            $.mobile.loading( "hide" );
+            $('#galkon').popup('open', {
+                    transition: 'pop'
+                });
+        }
+    });
+}
+</script>
+
+<style>
+a {
+      text-decoration:none;
+   }
+</style>
+</head>
+
+<body>
+
+<div data-role="page" id="pageone">
+  <div data-role="header" data-position="fixed" data-theme="e">
+    <h1>Mobile Aplication Report</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+  <div class="ui-grid-b ui-responsive">
+      <div class="ui-block-a">
+      </div>
+      <div class="ui-block-b">
+       
+       <center>
+       <img src="img/hhhh.png" width="135" height="127" />
+       </center>
+       
+            <label for="nama">User :</label>
+            <input type="text" id="nama"/>
+            <label for="pass">Pass :</label>
+            <input type="password" id="pass"  />
+            <button data-role="button" data-mini="true" data-inline="true" data-theme="e" id="login" onClick="loaddata();">Login</button>
+      </div>
+      <div class="ui-block-c">
+      </div>
+  </div>
+    
+    <div data-role="popup" id="eror">
+      <div data-role="main" class="ui-content">
+        <h2>Login Error</h2>
+        <p id="pesan">User or Password maybe wrong</p>
+        <a href="#" class="ui-btn ui-btn-inline ui-shadow ui-corner-all" data-rel="back">OK</a>
+      </div>
+    </div>
+    
+    <div data-role="popup" id="galkon">
+      <div data-role="main" class="ui-content">
+        <h2>Connection Lost</h2>
+        <p id="pesan">Connecting to Server Failed</p>
+        <a href="#" class="ui-btn ui-btn-inline ui-shadow ui-corner-all" data-rel="back">OK</a>
+      </div>
+    </div>
+  
+  </div>
+
+  <div data-role="footer" data-position="fixed" data-theme="e">
+    <h1>Semeru Teknik</h1>
+  </div>
+</div>
+
+
+
+</body>
+</html>

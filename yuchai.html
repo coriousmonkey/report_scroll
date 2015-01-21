@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" type="image/ico" href="">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+
+	<title>FixedColumns example - Multiple fixed columns</title>
+	<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="css/dataTables.fixedColumns.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.squareui.css" />
+	<style type="text/css" class="init">
+
+	/* Ensure that the demo table scrolls */
+	th, td { white-space: nowrap; }
+	
+    .sembunyi {
+        display:none;
+    }
+
+	</style>
+	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+	<script type="text/javascript" language="javascript" src="js/dataTables.fixedColumns.js"></script>
+    <script src="plugin/jquery.session.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/host.js"></script>
+    <script src="js/jquery.mobile-1.4.0.min.js"></script>
+	<script type="text/javascript" language="javascript" class="init">
+
+$(document).ready(function() {
+    jqUpdateSize();    
+    $('#loaddata').click(function(){
+       loaddata(getUrlParameter('tahun')); 
+    });
+    
+    loaddata(getUrlParameter('tahun'));
+    //alert(hostnya);
+    document.addEventListener("backbutton", function(e){
+           $( "#left-panel" ).panel( "open" );
+    }, false);
+});
+
+$(document).on("pagebeforeshow","#pageone",function(){ // When entering pagetwo
+    $.get('swipe.txt', function(data) {
+        $("#menu").html(data);
+        $('#menu').collapsibleset('refresh');
+        $('ul').listview( "refresh" );
+    }, 'text');
+});
+
+$(window).resize(function(){
+    jqUpdateSize();
+});
+
+function getUrlParameter(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+} 
+
+function jqUpdateSize(){
+    // Get the dimensions of the viewport
+    var width = $(window).width();
+    var height = $(window).height();
+    var mwidth=width*85/100;
+    
+    //alert(mwidth);
+    
+    $("<style type='text/css'> div.dataTables_wrapper { width: "+mwidth+"px; margin: 0 auto; } </style>").appendTo("head");
+    
+    if (width<=400){
+        
+        var r = confirm("Silakan aktifkan rotasi layar!\natau anda bisa menggunakan\nperangkat dengan layar\nlebih dari 400px");
+        if (r == true) {
+            location.reload();
+        } else {
+            location.reload();
+        } 
+        
+    }
+}
+
+function update(){
+    var height = ($(window).height())*70/100;
+    
+    var table = $('#example').DataTable( {
+		scrollY:        height+"px",
+		scrollX:        true,
+		scrollCollapse: true,
+		paging:         false
+	} );
+	new $.fn.dataTable.FixedColumns( table, {
+		leftColumns: 3
+	});
+}
+
+function add(){
+    $("#example").attr("cellspacing","0");
+    $("#example").attr("width","100%");
+    $("#example").addClass("stripe row-border order-column")
+    //cellspacing="0" width="100%"
+}
+function loaddata(tahun){
+        $.mobile.loading( 'show', {
+        	text: 'Downloading Data',
+        	textVisible: true,
+        	theme: 'a',
+        	html: ""
+        });
+        $.ajax({
+            type: "GET",
+            url: hostnya+"fixed-yc.php?tahun="+tahun,
+            crossDomain: true,
+            data: '',
+            timeout: 25000,
+            success: function (data) {
+                        $.mobile.loading( "hide" );
+                        $( "table#example tbody" ).html( data );
+                        add();
+                        update();
+                },
+            error: function (err) {
+                $.mobile.loading( "hide" );
+                alert("koneksi gagal"+err);
+                //$.mobile.loading( "hide" );
+                }
+        }); 
+}
+
+	</script>
+</head>
+
+<body class="dt-example" style="background-color: white;">
+
+<div data-role="page" id="pageone" style="background-color: white;">
+  <div id="header" data-role="header" data-theme="e"  data-position="fixed" data-fullscreen= "true">
+    <h1><a href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Forecast Khusus Yuchai</a></h1>
+        <div data-role="popup" id="popupBasic">
+            <p>Laporan Forecast Khusus Yuchai</p>
+        </div>
+    <a href="#left-panel" data-theme="e" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+  </div>
+  <div data-role="main" class="ui-content" style="background-color: white;">
+  <br /><br />       
+         <div class="container">  
+    		<section>
+    			<table id="example" >
+                    <thead>
+                        <th>No</th>
+                          <th>Kategori</th>
+                          <th style='text-align:center'>Total</th>
+                          <th style='text-align:center'>Jan</th>
+                          <th style='text-align:center'>Feb</th>
+                          <th style='text-align:center'>Mar</th>
+                          <th style='text-align:center'>Apr</th>
+                          <th style='text-align:center'>Mei</th>
+                          <th style='text-align:center'>Jun</th>
+                          <th style='text-align:center'>Jul</th>
+                          <th style='text-align:center'>Ags</th>
+                          <th style='text-align:center'>Sep</th>
+                          <th style='text-align:center'>Okt</th>
+                          <th style='text-align:center'>Nop</th>
+                          <th style='text-align:center'>Des</th>
+                    </thead>
+                    <tbody></tbody>
+    			</table>	
+    		</section>
+    	</div>
+        <div class="modal"></div>
+    </div>
+    
+    <div data-role="panel" id="left-panel" data-theme="c" style="background-color: white;" >
+            <br />
+     
+     <div data-role="collapsible-set" data-theme="a" id="menu">
+        
+     </div>
+            <br />
+        <button onClick="window.location.replace('dyuchai.html');" data-role="button" data-mini="true" data-inline="true" data-icon="carat-l" data-iconpos="right" data-theme="e">Back</button>
+            <br />
+        <button onClick="$.session.clear();window.location.replace('index.html');" class="ui-btn ui-btn-inline ui-shadow ui-corner-all" data-theme="e" >Logout</button>
+      
+      
+    </div>
+    
+    <div id="footerr" data-role="footer" data-theme="e"  data-position="fixed" data-fullscreen= "true"> 
+	   <h4>Semeru Teknik</h4> 
+    </div> 
+
+</div>
+
+</body>
+</html>

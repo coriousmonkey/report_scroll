@@ -1,0 +1,21 @@
+<div data-role="collapsible" data-theme="e" data-collapsed="false" >
+          <h3>Lap Fc Penjualan</h3>
+              <ul class="ui-listview ui-group-theme-c" data-role="listview" data-theme="c" id="link1">
+                <li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('ddivisi.html');">Fc Divisi</a></li>
+                <li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('dsales.html')">Fc Sales</a></li>
+                <li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('dcabang.html')">Fc Cabang</a></li>
+                <li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('dkategori.html')">Fc Kategory</a></li>
+        	<li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('dyuchai.html')">Fc Yuchai</a></li>      
+	</ul>
+          
+        </div>
+        <div data-role="collapsible" data-theme="e">
+                 <h3>I'm a header</h3>
+          	<ul class="ui-listview ui-group-theme-c" data-role="listview" data-theme="c" id="link1">      
+		<li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('')">no link</a></li>
+                <li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('')">no link</a></li>
+        	<li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('')">no link</a></li>      
+		</ul>
+
+            </div>
+        

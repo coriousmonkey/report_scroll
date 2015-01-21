@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.squareui.css" />
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile-1.4.0.min.js"></script>
+  <script src="plugin/jquery.session.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script src="js/host.js"></script>
+  
+
+<script src="js/menu.js"></script>
+<style>
+/* Manually hidden */ 
+th {
+    border-bottom: 1px solid #d6d6d6;
+}
+tr:nth-child(even) {
+    background: #e9e9e9;
+}
+thead{
+    background-color: #457B87;
+    color: #fff;
+}
+
+/* Swipe works with mouse as well but often causes text selection. */
+#demo-page * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+/* Arrow only buttons in the header. */
+#demo-page .ui-header .ui-btn {
+    background: none;
+    border: none;
+    top: 9px;
+}
+#demo-page .ui-header .ui-btn-inner {
+    border: none;
+}
+/* Content styling. */
+dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
+dt { font-size: 2em; font-weight: bold; }
+dt span { font-size: .5em; color: #777; margin-left: .5em; }
+dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px solid #eee; }
+.back-btn { float: right; margin: 0 2em 1em 0; }
+
+.sembunyi {
+    display:none;
+}
+
+</style>  
+
+</head>
+<body >
+<div data-url="demo-page" data-role="page" id="demo-page" style="overflow: hidden;" data-theme="e">
+    
+    <div data-role="header" data-theme="e" data-position="fixed">
+        <h1>Menu</h1>
+        <a href="#left-panel" data-theme="d" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+    
+        
+    </div><!-- /header -->
+    
+    <div data-role="content">
+        
+        <div class="modal"></div>
+    </div><!-- /content################################################################### -->
+    
+    <div data-role="panel" id="left-panel" data-theme="c" style="background-color: #fff;" >
+            <br />
+     
+     <div data-role="collapsible-set" data-theme="a" id="menu">
+        
+     </div>
+            <br />
+        <button onClick="location.reload();" data-role="button" data-mini="true" data-inline="true" data-icon="carat-l" data-iconpos="right" data-theme="e">Back</button>
+            <br />
+        <button onClick="$.session.clear();window.location.replace('index.html');" data-role="button" data-mini="true" data-inline="true" data-theme="e" >Logout</button>
+      
+    </div><!-- /panel -->
+    
+    <div data-role="footer" data-position="fixed" data-theme="e">
+        <h1>Semeru Teknik</h1>
+    </div>
+</div>
+
+
+</body>
+</html>
