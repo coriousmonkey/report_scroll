@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.squareui.css" />
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile-1.4.0.min.js"></script>
+  <script src="plugin/jquery.session.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script src="js/host.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#loaddata').click(function(){
+        var tahun=$('#Tahun').val();
+        var bulan=$('#bulan').val();
+        window.location.replace('ac_sales.html?tahun='+tahun+'&bulan='+bulan);
+    });
+});
+</script>
+<style>
+/* Manually hidden */ 
+th {
+    border-bottom: 1px solid #d6d6d6;
+}
+tr:nth-child(even) {
+    background: #e9e9e9;
+}
+thead{
+    background-color: #457B87;
+    color: #fff;
+}
+
+/* Swipe works with mouse as well but often causes text selection. */
+#demo-page * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+/* Arrow only buttons in the header. */
+#demo-page .ui-header .ui-btn {
+    background: none;
+    border: none;
+    top: 9px;
+}
+#demo-page .ui-header .ui-btn-inner {
+    border: none;
+}
+/* Content styling. */
+dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
+dt { font-size: 2em; font-weight: bold; }
+dt span { font-size: .5em; color: #777; margin-left: .5em; }
+dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px solid #eee; }
+.back-btn { float: right; margin: 0 2em 1em 0; }
+
+.sembunyi {
+    display:none;
+}
+
+</style>  
+
+</head>
+<body >
+<div data-url="demo-page" data-role="page" id="demo-page" style="overflow: auto;" data-theme="e" style="background-color: white;">
+    
+    <div data-role="header" data-theme="e" data-position="fixed">
+        <h1><a href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Actual Sales</a></h1>
+        <div data-role="popup" id="popupBasic">
+            <p>Laporan Actual Sales</p>
+        </div>
+    
+    </div><!-- /header -->
+    
+    <div data-role="content">
+            <div class="ui-grid-c ui-responsive" id="option-divisi">
+                  <div class="ui-block-a"></div>
+                  <div class="ui-block-b">
+                        <label for="Tahun">Tahun :</label>
+                        <input type="text" value="2015" id="Tahun" />
+                  </div>
+                  <div class="ui-block-c">
+                        <label for="divisi">Divisi :</label>
+                            <select id="bulan">
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">Mei</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Agt</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Okt</option>
+                                <option value="11">Nop</option>
+                                <option value="12">Des</option>
+                            </select><br />
+                            <button id="loaddata" data-role="button" data-mini="true" data-inline="true" data-iconpos="right" data-theme="e">Load Table</button>
+                  </div>
+              <div class="ui-block-d">
+              </div>
+            </div>
+        
+        
+        <div class="modal"></div>
+    </div><!-- /content################################################################### -->
+    
+    <div data-role="footer" data-position="fixed" data-theme="e">
+        <h1>Semeru Teknik</h1>
+    </div>
+</div>
+
+</body>
+</html>

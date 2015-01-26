@@ -10,11 +10,15 @@
           
         </div>
         <div data-role="collapsible" data-theme="e">
-                 <h3>I'm a header</h3>
+                 <h3>Lap Aktual</h3>
           	<ul class="ui-listview ui-group-theme-c" data-role="listview" data-theme="c" id="link1">      
-		<li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('')">no link</a></li>
-                <li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('')">no link</a></li>
-        	<li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('')">no link</a></li>      
+		<li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('ac_ddivisi.html')">Ac Divisi</a></li>
+		<li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('ac_dsales.html')">Ac Sales</a></li>
+                <li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('ac_dcabang.html')">Ac Cabang</a></li>
+		
+		<li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('ac_dkategori.html')">Ac Kategory</a></li>			
+      		<li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('ac_dyc.html')">Ac Yuchai</a></li>			
+      
 		</ul>
 
             </div>
