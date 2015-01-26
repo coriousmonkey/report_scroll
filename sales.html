@@ -34,6 +34,10 @@
     border: 2px solid #457B87; 
     outline: none; 
     background: rgb(255, 255, 255); } 
+    
+    .sembunyi2{
+    visibility: hidden;
+    } 
 
 	</style>
 	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
@@ -57,6 +61,17 @@ $(document).ready(function() {
            $( "#left-panel" ).panel( "open" );
     }, false);
     //alert(hostnya);
+    
+    $('#cari').click(function(){
+        $('label').removeClass( "sembunyi2" );
+        $('input').focus();
+        $( "#header" ).toolbar( "hide" );
+       $( "#footerr" ).toolbar( "hide" );
+    });
+    
+    $('#example').on("tap",function(){
+        $('label').addClass('sembunyi2');
+    });
 });
 
 $(document).on("pagebeforeshow","#pageone",function(){ // When entering pagetwo
@@ -173,6 +188,9 @@ function loaddata(tahun,divisi){
                         jQuery.moveColumn(tbl, 13,1);
                         add();
                         update();
+                        
+                        $('label').addClass('sembunyi2');
+                        
                         var divisinya=null;
                         if(divisi=="MR"){
                             divisinya="Marine";
@@ -218,6 +236,7 @@ jQuery.moveColumn = function (table, from, to) {
             <p id="header2">Laporan Forecast Sales</p>
         </div>
     <a href="#left-panel" data-theme="e" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+    <a id="cari" data-theme="e" data-icon="search" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
   </div>
   <div data-role="main" class="ui-content" style="background-color: white;">
   <br /><br />       
