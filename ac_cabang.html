@@ -188,7 +188,24 @@ function loaddata(bulan,tahun){
         });
         $.ajax({
             type: "GET",
-            url: hostnya+"ac_cabang.php?bulan="+bulan+"&tahun="+tahun,
+            url: hostnya+"configupdate.php?bulan="+bulan+"&tahun="+tahun,
+            crossDomain: true,
+            data: '',
+            timeout: 25000,
+            success: function (data) {
+                        loadata2(bulan,tahun);
+                },
+            error: function (err) {
+                $.mobile.loading( "hide" );
+                alert("koneksi gagal"+err);
+                //$.mobile.loading( "hide" );
+                }
+        }); 
+}
+function loadata2(bulannya,tahunnya){
+    $.ajax({
+            type: "GET",
+            url: hostnya+"ac_cabang.php?bulan="+bulannya+"&tahun="+tahunnya,
             crossDomain: true,
             data: '',
             timeout: 25000,
@@ -204,8 +221,9 @@ function loaddata(bulan,tahun){
                 alert("koneksi gagal"+err);
                 //$.mobile.loading( "hide" );
                 }
-        }); 
+        });
 }
+
 
 function rbh_bulan(nomerbulan){
     var bulannya=null;

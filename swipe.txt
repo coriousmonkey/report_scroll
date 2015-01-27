@@ -1,4 +1,4 @@
-<div data-role="collapsible" data-theme="e" data-collapsed="false" >
+<div data-role="collapsible" data-theme="e"  >
           <h3>Lap Fc Penjualan</h3>
               <ul class="ui-listview ui-group-theme-c" data-role="listview" data-theme="c" id="link1">
                 <li class="ui-first-child ui-last-child"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" onclick="window.location.replace('ddivisi.html');">Fc Divisi</a></li>
