@@ -12,6 +12,9 @@
 
 <script>
 $(document).ready(function() {
+    var tanggal = new Date();
+    var taun = tanggal.getFullYear();
+    $('#Tahun').val(taun);
     $('#loaddata').click(function(){
         var tahun=$('#Tahun').val();
        window.location.replace('kategori.html?tahun='+tahun);
@@ -31,7 +34,7 @@ thead{
     color: #fff;
 }
 
-/* Swipe works with mouse as well but often causes text selection. */
+/* Swipe works with mouse as well but often causes text select
 #demo-page * {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -39,7 +42,7 @@ thead{
     -o-user-select: none;
     user-select: none;
 }
-/* Arrow only buttons in the header. */
+rrow only buttons in the header. */
 #demo-page .ui-header .ui-btn {
     background: none;
     border: none;
