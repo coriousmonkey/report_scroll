@@ -51,10 +51,7 @@
 
 $(document).ready(function() {
     otentifikasi();
-    jqUpdateSize();    
-    /*$('#loaddata').click(function(){
-       loaddata(getUrlParameter('tahun'),getUrlParameter('divisi')); 
-    });*/
+    jqUpdateSize();
     
     loaddata(getUrlParameter('tahun'),getUrlParameter('divisi'));
     //alert(hostnya);
@@ -124,7 +121,7 @@ function jqUpdateSize(){
 }
 
 function update(){
-    var height = ($(window).height())*70/100;
+    var height = ($(window).height())*60/100;
     
     var table = $('#example').DataTable( {
 		scrollY:        height+"px",
@@ -152,15 +149,15 @@ function loaddata(tahun,divisi){
         });
         $.ajax({
             type: "GET",
-            url: hostnya+"fixed_divisi.php?tahun="+tahun+"&divisi="+divisi,
+            url: hostnya+"report_divisi2.php?tahun="+tahun+"&divisi="+divisi,
             crossDomain: true,
             data: '',
             timeout: 25000,
             success: function (data) {
                         $.mobile.loading( "hide" );
                         $( "table#example" ).html( data );
-                        var tbl = jQuery('table');
-                        jQuery.moveColumn(tbl, 13,1);
+                        //var tbl = jQuery('table');
+                        //jQuery.moveColumn(tbl, 13,1);
                         add();
                         update();
                         $('label').addClass('sembunyi2');
@@ -226,8 +223,6 @@ function otentifikasi(){
          <div class="container">  
     		<section>
     			<table id="example" >
-                    
-                    <tbody></tbody>
     			</table>	
     		</section>
     	</div>
