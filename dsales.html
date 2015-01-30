@@ -11,7 +11,22 @@
   <script src="js/host.js"></script>
 
 <script>
+$(document).on("pagebeforeshow","#demo-page",function(){ // When entering pagetwo
+    $.get('swipe.txt', function(data) {
+        $("#menu").html(data);
+        $('#menu').collapsibleset('refresh');
+        $('ul').listview( "refresh" );
+    }, 'text');
+});
 $(document).ready(function() {
+    $( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
+        if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+            if ( e.type === "swiperight" ) {
+                $( "#left-panel" ).panel( "open" );
+            }
+        }
+    });
+    
     var tanggal = new Date();
     var taun = tanggal.getFullYear();
     $('#Tahun').val(taun);
@@ -25,6 +40,9 @@ $(document).ready(function() {
 </script>
 <style>
 /* Manually hidden */ 
+a {
+    text-decoration: none;
+}
 th {
     border-bottom: 1px solid #d6d6d6;
 }
@@ -71,11 +89,12 @@ dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px
 <div data-url="demo-page" data-role="page" id="demo-page" style="overflow: auto;" data-theme="e" style="background-color: white;">
     
     <div data-role="header" data-theme="e" data-position="fixed">
-        <h1><a href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Forecast Sales</a></h1>
+        <h1><a href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Target Penjualan Sales</a></h1>
         <div data-role="popup" id="popupBasic">
-            <p>Laporan Forecast Sales</p>
+            <p>Target Penjualan Sales</p>
         </div>
-    
+          <a href="#left-panel" data-theme="e" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+
     </div><!-- /header -->
     
     <div data-role="content">
@@ -94,7 +113,7 @@ dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px
                                 <option value="LK">Luar Kota</option>
                                 <option value="all" selected="selected">All</option>
                             </select><br />
-                            <button id="loaddata" data-role="button" data-mini="true" data-inline="true" data-iconpos="right" data-theme="e">Load Table</button>
+                            <button id="loaddata" data-role="button" data-mini="true" data-inline="true" data-iconpos="right" data-theme="e">OK</button>
                   </div>
               <div class="ui-block-d">
               </div>
@@ -103,6 +122,17 @@ dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px
         
         <div class="modal"></div>
     </div><!-- /content################################################################### -->
+    
+    <div data-role="panel" id="left-panel" data-theme="c" style="background-color: white;" >
+            <br />
+     <div data-role="collapsible-set" data-theme="a" id="menu">
+        
+     </div>
+            <br />
+        <button onClick="window.location.replace('menu.html');" data-role="button" data-mini="true" data-inline="true" data-icon="carat-l" data-iconpos="right" data-theme="e">Back</button>
+            <br />
+        <button onClick="$.session.clear();window.location.replace('index.html');" class="ui-btn ui-btn-inline ui-shadow ui-corner-all" data-theme="e" >Logout</button>
+    </div>
     
     <div data-role="footer" data-position="fixed" data-theme="e">
         <h1>Semeru Teknik</h1>

@@ -13,7 +13,9 @@
 
 	/* Ensure that the demo table scrolls */
 	th, td { white-space: nowrap; }
-	
+	 a {
+    text-decoration: none;
+}
     .sembunyi {
         display:none;
     }
@@ -53,8 +55,7 @@ $(document).ready(function() {
     //otentifikasi();
     var bulanreq=rbh_bulan(getUrlParameter('bulan'));
     var thnreq=getUrlParameter('tahun');
-    $('#header1').append(", "+bulanreq+" "+thnreq);
-    $('#header2').append(", "+bulanreq+" "+thnreq);
+     $('#headnya').append(", "+bulanreq+" "+thnreq);
     
     jqUpdateSize();    
     
@@ -215,6 +216,8 @@ function loaddata2(bulannya,tahunnya){
                         add();
                         update();
                         $('label').addClass('sembunyi2');
+                        $( "#header" ).toolbar( "hide" );
+                         $( "#footerr" ).toolbar( "hide" );
                 },
             error: function (err) {
                 $.mobile.loading( "hide" );
@@ -283,6 +286,7 @@ function rbh_bulan(nomerbulan){
   <br />      
          <div class="container">  
     		<section>
+            <strong><center id="headnya" class="judul">Laporan Aktual Sales</center></strong>
     			<table id="example" class="display" >
     			</table>	
     		</section>

@@ -13,6 +13,9 @@
 
 	/* Ensure that the demo table scrolls */
 	th, td { white-space: nowrap; }
+    a {
+    text-decoration: none;
+}
 	
     .sembunyi {
         display:none;
@@ -39,6 +42,10 @@
     visibility: hidden;
 }
 
+.judul{
+    font-size: 18px;
+}
+
 	</style>
 	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
@@ -54,8 +61,8 @@ $(document).ready(function() {
     //otentifikasi();
     var bulanreq=rbh_bulan(getUrlParameter('bulan'));
     var thnreq=getUrlParameter('tahun');
-    $('#header1').append(", "+bulanreq+" "+thnreq);
-    $('#header2').append(", "+bulanreq+" "+thnreq);
+    
+    $('#headnya').append(", "+bulanreq+" "+thnreq);
     
     jqUpdateSize();    
     
@@ -217,6 +224,8 @@ function loaddata2(bulannya,tahunnya,divisinya){
                         add();
                         update();
                         $('label').addClass('sembunyi2');
+                        $( "#header" ).toolbar( "hide" );
+                         $( "#footerr" ).toolbar( "hide" );
                 },
             error: function (err) {
                 $.mobile.loading( "hide" );
@@ -273,9 +282,9 @@ function rbh_bulan(nomerbulan){
 
 <div data-role="page" id="pageone" style="background-color: white;">
   <div id="header" data-role="header" data-theme="e"  data-position="fixed" data-fullscreen= "true">
-    <h1><a id="header1" href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Actual Divisi</a></h1>
+    <h1><a id="header1" href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Aktual Divisi</a></h1>
         <div data-role="popup" id="popupBasic">
-            <p id="header2">Laporan Actual Divisi</p>
+            <p id="header2">Laporan Aktual Divisi</p>
         </div>
     <a href="#left-panel" data-theme="e" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
     <a id="cari" data-theme="e" data-icon="search" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
@@ -284,6 +293,7 @@ function rbh_bulan(nomerbulan){
   <br />      
          <div class="container">  
     		<section>
+                 <strong><center id="headnya" class="judul">Laporan Aktual Divisi</center></strong>
     			<table id="example" class="display" >
     			</table>	
     		</section>

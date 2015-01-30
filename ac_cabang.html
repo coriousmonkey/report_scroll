@@ -38,6 +38,9 @@
 .sembunyi2{
     visibility: hidden;
 }
+a {
+    text-decoration: none;
+}
 
 	</style>
 	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
@@ -53,8 +56,7 @@ $(document).ready(function() {
     //otentifikasi();
     var bulanreq=rbh_bulan(getUrlParameter('bulan'));
     var thnreq=getUrlParameter('tahun');
-    $('#header1').append(", "+bulanreq+" "+thnreq);
-    $('#header2').append(", "+bulanreq+" "+thnreq);
+    $('#headnya').append(", "+bulanreq+" "+thnreq);
     
     jqUpdateSize();    
     
@@ -215,6 +217,8 @@ function loadata2(bulannya,tahunnya){
                         add();
                         update();
                         $('label').addClass('sembunyi2');
+                        $( "#header" ).toolbar( "hide" );
+                         $( "#footerr" ).toolbar( "hide" );
                 },
             error: function (err) {
                 $.mobile.loading( "hide" );
@@ -273,9 +277,9 @@ function rbh_bulan(nomerbulan){
 
 <div data-role="page" id="pageone" style="background-color: white;">
   <div id="header" data-role="header" data-theme="e"  data-position="fixed" data-fullscreen= "true">
-    <h1><a id="header1" href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Actual Khusus Cabang</a></h1>
+    <h1><a id="header1" href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Aktual Khusus Cabang</a></h1>
         <div data-role="popup" id="popupBasic">
-            <p id="header2">Laporan Actual Khusus Cabang</p>
+            <p id="header2">Laporan Aktual Khusus Cabang</p>
         </div>
     <a href="#left-panel" data-theme="e" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
     <a id="cari" data-theme="e" data-icon="search" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
@@ -284,6 +288,7 @@ function rbh_bulan(nomerbulan){
   <br />      
          <div class="container">  
     		<section>
+            <strong><center id="headnya" class="judul" style="font-size: 18px;">Laporan Aktual Cabang</center></strong>
     			<table id="example" class="display" >
     			</table>	
     		</section>
