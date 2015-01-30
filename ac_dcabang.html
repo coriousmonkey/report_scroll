@@ -11,7 +11,16 @@
   <script src="js/host.js"></script>
 
 <script>
+$(document).on("pagebeforeshow","#demo-page",function(){ // When entering pagetwo
+    $.get('swipe.txt', function(data) {
+        $("#menu").html(data);
+        $('#menu').collapsibleset('refresh');
+        $('ul').listview( "refresh" );
+    }, 'text');
+});
+
 $(document).ready(function() {
+    
     var tanggal = new Date();
     var taun = tanggal.getFullYear();
     $('#Tahun').val(taun);
@@ -21,6 +30,18 @@ $(document).ready(function() {
         var bulan=$('#bulan').val();
         window.location.replace('ac_cabang.html?tahun='+tahun+'&bulan='+bulan);
     });
+    
+    $( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
+        if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+            if ( e.type === "swiperight" ) {
+                $( "#left-panel" ).panel( "open" );
+            }
+        }
+    });
+    
+    document.addEventListener("backbutton", function(e){
+           $( "#left-panel" ).panel( "open" );
+    }, false);
 });
 </script>
 <style>
@@ -34,6 +55,10 @@ tr:nth-child(even) {
 thead{
     background-color: #457B87;
     color: #fff;
+}
+
+a {
+    text-decoration: none;
 }
 
 /* Swipe works with mouse as well but often causes text s
@@ -75,7 +100,8 @@ dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px
         <div data-role="popup" id="popupBasic">
             <p>Laporan Actual Khusus Cabang</p>
         </div>
-    
+    <a href="#left-panel" data-theme="e" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+
     </div><!-- /header -->
     
     <div data-role="content">
@@ -110,6 +136,17 @@ dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px
         
         <div class="modal"></div>
     </div><!-- /content################################################################### -->
+    
+    <div data-role="panel" id="left-panel" data-theme="c" style="background-color: white;" >
+            <br />
+     <div data-role="collapsible-set" data-theme="a" id="menu">
+        
+     </div>
+            <br />
+        <button onClick="window.location.replace('menu.html');" data-role="button" data-mini="true" data-inline="true" data-icon="carat-l" data-iconpos="right" data-theme="e">Back</button>
+            <br />
+        <button onClick="$.session.clear();window.location.replace('index.html');" class="ui-btn ui-btn-inline ui-shadow ui-corner-all" data-theme="e" >Logout</button>
+    </div>
     
     <div data-role="footer" data-position="fixed" data-theme="e">
         <h1>Semeru Teknik</h1>

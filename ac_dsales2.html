@@ -11,15 +11,19 @@
   <script src="js/host.js"></script>
 
 <script>
-$(document).on("pagebeforeshow","#demo-page",function(){ // When entering pagetwo
-    $.get('swipe.txt', function(data) {
-        $("#menu").html(data);
-        $('#menu').collapsibleset('refresh');
-        $('ul').listview( "refresh" );
-    }, 'text');
-});
-
 $(document).ready(function() {
+    var tanggal = new Date();
+    var taun = tanggal.getFullYear();
+    $('#Tahun').val(taun);
+    
+    $('#loaddata').click(function(){
+        var tahun=$('#Tahun').val();
+        var bulan=$('#bulan').val();
+        var divisi=$('#divisi').val();//tekan kene...
+        
+        window.location.replace('ac_sales2.html?tahun='+tahun+'&bulan='+bulan+'&divisi='+divisi);
+    });
+    
     $( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
         if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
             if ( e.type === "swiperight" ) {
@@ -28,18 +32,18 @@ $(document).ready(function() {
         }
     });
     
-    var tanggal = new Date();
-    var taun = tanggal.getFullYear();
-    $('#Tahun').val(taun);
-    
-    $('#loaddata').click(function(){
-        var tahun=$('#Tahun').val();
-        var bulan=$('#bulan').val();
-        window.location.replace('ac_kategori.html?tahun='+tahun+'&bulan='+bulan);
-    });
     document.addEventListener("backbutton", function(e){
            $( "#left-panel" ).panel( "open" );
     }, false);
+    
+});
+
+$(document).on("pagebeforeshow","#demo-page",function(){ // When entering pagetwo
+    $.get('swipe.txt', function(data) {
+        $("#menu").html(data);
+        $('#menu').collapsibleset('refresh');
+        $('ul').listview( "refresh" );
+    }, 'text');
 });
 </script>
 <style>
@@ -54,11 +58,12 @@ thead{
     background-color: #457B87;
     color: #fff;
 }
+
 a {
     text-decoration: none;
 }
 
-/* Swipe works with mouse as well but often causes text selec
+/* Swipe works with mouse as well but often causes text se
 #demo-page * {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -66,7 +71,7 @@ a {
     -o-user-select: none;
     user-select: none;
 }
-Arrow only buttons in the header. */
+row only buttons in the header. */
 #demo-page .ui-header .ui-btn {
     background: none;
     border: none;
@@ -93,22 +98,32 @@ dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px
 <div data-url="demo-page" data-role="page" id="demo-page" style="overflow: auto;" data-theme="e" style="background-color: white;">
     
     <div data-role="header" data-theme="e" data-position="fixed">
-        <h1><a href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Actual Perkategori</a></h1>
+        <h1><a href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Actual Sales</a></h1>
         <div data-role="popup" id="popupBasic">
-            <p>Laporan Actual Perkategori</p>
+            <p>Laporan Actual Sales</p>
         </div>
-    <a href="#left-panel" data-theme="e" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+        <a href="#left-panel" data-theme="e" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+
     </div><!-- /header -->
     
     <div data-role="content">
             <div class="ui-grid-c ui-responsive" id="option-divisi">
                   <div class="ui-block-a"></div>
                   <div class="ui-block-b">
-                        <label for="Tahun">Tahun :</label>
-                        <input type="text" value="2015" id="Tahun" />
+                  
+                  <label for="divisi">Divisi :</label>
+                                <select id="divisi">
+                                    <option value="all">ALL</option>
+                                    <option value="CB">Cabang</option>
+                                    <option value="KT">Konter</option>
+                                    <option value="LK">Luar Kota</option>
+                                    <option value="MR">Marine</option>
+                                </select>
+                            
+                        
                   </div>
                   <div class="ui-block-c">
-                        <label for="divisi">Divisi :</label>
+                        <label for="bulan">Bulan :</label>
                             <select id="bulan">
                                 <option value="1">Jan</option>
                                 <option value="2">Feb</option>
@@ -122,7 +137,10 @@ dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px
                                 <option value="10">Okt</option>
                                 <option value="11">Nop</option>
                                 <option value="12">Des</option>
-                            </select><br />
+                            </select>
+                            <label for="Tahun">Tahun :
+                        <input type="text" value="2015" id="Tahun" /></label>
+                            <br />
                             <button id="loaddata" data-role="button" data-mini="true" data-inline="true" data-iconpos="right" data-theme="e">Load Table</button>
                   </div>
               <div class="ui-block-d">
@@ -135,6 +153,7 @@ dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px
     
     <div data-role="panel" id="left-panel" data-theme="c" style="background-color: white;" >
             <br />
+     
      <div data-role="collapsible-set" data-theme="a" id="menu">
         
      </div>
@@ -142,6 +161,8 @@ dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px
         <button onClick="window.location.replace('menu.html');" data-role="button" data-mini="true" data-inline="true" data-icon="carat-l" data-iconpos="right" data-theme="e">Back</button>
             <br />
         <button onClick="$.session.clear();window.location.replace('index.html');" class="ui-btn ui-btn-inline ui-shadow ui-corner-all" data-theme="e" >Logout</button>
+      
+      
     </div>
     
     <div data-role="footer" data-position="fixed" data-theme="e">
