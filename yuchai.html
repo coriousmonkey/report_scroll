@@ -38,7 +38,15 @@
     .sembunyi2{
     visibility: hidden;
     } 
+    
+    a {
+    text-decoration: none;
+    }
 
+    .judul{
+    font-size: 18px;
+}
+    
 	</style>
 	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
@@ -55,6 +63,9 @@ $(document).ready(function() {
     $('#loaddata').click(function(){
        loaddata(getUrlParameter('tahun')); 
     });
+    
+    var thnreq=getUrlParameter('tahun');
+    $('#headnya').append("<br>Tahun: "+thnreq);
     
     loaddata(getUrlParameter('tahun'));
     //alert(hostnya);
@@ -210,9 +221,9 @@ function loaddata(tahun){
 
 <div data-role="page" id="pageone" style="background-color: white;">
   <div id="header" data-role="header" data-theme="e"  data-position="fixed" data-fullscreen= "true">
-    <h1><a href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Forecast Khusus Yuchai</a></h1>
+    <h1><a href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Target Penjualan Khusus Yuchai</a></h1>
         <div data-role="popup" id="popupBasic">
-            <p>Laporan Forecast Khusus Yuchai</p>
+            <p>Target Penjualan Khusus Yuchai</p>
         </div>
     <a href="#left-panel" data-theme="e" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
     <a id="cari" data-theme="e" data-icon="search" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
@@ -221,6 +232,7 @@ function loaddata(tahun){
   <br /><br />       
          <div class="container">  
     		<section>
+                <strong><center id="headnya" class="judul">Target Penjualan Barang Khusus Yuchai</center></strong>
     			<table id="example" >
     			</table>	
     		</section>

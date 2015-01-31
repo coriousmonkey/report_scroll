@@ -15,8 +15,7 @@
 	th, td { white-space: nowrap; }
     a {
     text-decoration: none;
-}
-	
+    }
     .sembunyi {
         display:none;
     }
@@ -62,7 +61,7 @@ $(document).ready(function() {
     var bulanreq=rbh_bulan(getUrlParameter('bulan'));
     var thnreq=getUrlParameter('tahun');
     
-    $('#headnya').append(", "+bulanreq+" "+thnreq);
+    $('#headnya').append("<br>"+bulanreq+" "+thnreq);
     
     jqUpdateSize();    
     

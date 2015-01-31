@@ -41,6 +41,9 @@
   a {
     text-decoration: none;
 }
+.judul{
+    font-size: 18px;
+}
 
 	</style>
 	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
@@ -56,7 +59,7 @@ $(document).ready(function() {
     //otentifikasi();
     var bulanreq=rbh_bulan(getUrlParameter('bulan'));
     var thnreq=getUrlParameter('tahun');
-     $('#headnya').append(", "+bulanreq+" "+thnreq);
+     $('#headnya').append("<br>"+bulanreq+" "+thnreq);
     
     jqUpdateSize();    
     

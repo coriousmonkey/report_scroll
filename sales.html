@@ -13,6 +13,10 @@
 
 	/* Ensure that the demo table scrolls */
 	th, td { white-space: nowrap; }
+    
+    a {
+        text-decoration: none;
+    }
 	
     .sembunyi {
         display:none;
@@ -33,11 +37,15 @@
  input:focus { 
     border: 2px solid #457B87; 
     outline: none; 
-    background: rgb(255, 255, 255); } 
+    background: rgb(255, 255, 255);    
+    } 
     
     .sembunyi2{
     visibility: hidden;
     } 
+    .judul{
+    font-size: 18px;
+}
 
 	</style>
 	<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
@@ -55,6 +63,19 @@ $(document).ready(function() {
     /*$('#loaddata').click(function(){
        loaddata(getUrlParameter('tahun'),getUrlParameter('divisi')); 
     });*/
+    
+    var thnreq=getUrlParameter('tahun');
+    var divisix=getUrlParameter('divisi');
+    
+    if(divisix=="all"){
+        divisix=" Semua Divisi";
+    }else{
+        divisix=" Khusus Divisi "+ubahdivisi(divisix);
+    }
+    
+    $('#headnya').append(divisix);
+    $('#headnya2').html("Tahun :"+thnreq);
+    
     
     loaddata(getUrlParameter('tahun'),getUrlParameter('divisi'));
     document.addEventListener("backbutton", function(e){
@@ -188,8 +209,10 @@ function loaddata(tahun,divisi){
                         jQuery.moveColumn(tbl, 13,1);
                         add();
                         update();
-                        
                         $('label').addClass('sembunyi2');
+                        
+                        $( "#header" ).toolbar( "hide" );
+                        $( "#footerr" ).toolbar( "hide" );
                         
                         var divisinya=null;
                         if(divisi=="MR"){
@@ -223,6 +246,19 @@ jQuery.moveColumn = function (table, from, to) {
         cols.eq(from).detach().insertBefore(cols.eq(to));
     });
 }
+function ubahdivisi(divisi){
+    if (divisi=='MR'){
+        divisi="Marine";
+    }
+    else if(divisi=="CB"){
+        divisi="Cabang";
+    }else if(divisi=='KT'){
+        divisi="Konter";
+    }else if(divisi=='LK'){
+        divisi="Luar Kota";
+    }
+    return divisi;
+}
 
 	</script>
 </head>
@@ -231,9 +267,9 @@ jQuery.moveColumn = function (table, from, to) {
 
 <div data-role="page" id="pageone" style="background-color: white;">
   <div id="header" data-role="header" data-theme="e"  data-position="fixed" data-fullscreen= "true">
-    <h1><a id="header1" href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Laporan Forecast Sales</a></h1>
+    <h1><a id="header1" href="#popupBasic" data-rel="popup" data-transition="pop" style="color: white;">Target Penjualan Sales</a></h1>
         <div data-role="popup" id="popupBasic">
-            <p id="header2">Laporan Forecast Sales</p>
+            <p id="header2">Target Penjualan Sales</p>
         </div>
     <a href="#left-panel" data-theme="e" data-icon="flat-menu" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
     <a id="cari" data-theme="e" data-icon="search" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
@@ -242,6 +278,10 @@ jQuery.moveColumn = function (table, from, to) {
   <br /><br />       
          <div class="container">  
     		<section>
+            
+            <strong><center id="headnya" class="judul">Target Penjualan Sales</center></strong>
+            <strong><center id="headnya2" class="judul"></center></strong>
+            
     			<table id="example" >
     			</table>	
     		</section>
